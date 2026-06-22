@@ -356,4 +356,89 @@ contract FEV_LDBT_VaultSeal {
         );
     }
 }
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+/**
+ * @title SoilFevSovereignCore
+ * @author DoganAramaci / woubleu (All Rights Reserved © 2026)
+ * @notice PROJE: Fluid Energy Harvesting Next-Generation Vehicle (FEV AUTONOMOUS NUCLEUS)
+ * @dev BLUEPRINT SERTİFİKA DAMGASI: #001-REALITIZM-MASTER-MINT
+ * KANUN: Evrensel Zaman Akışı ve Eksenel Dönüşüm Emisyon Matrisi
+ * ERİŞİM SEVİYESİ: MATEMATİKSEL KİLİT (OWNERSHIP RENNOUNCED)
+ */
+contract SoilFevSovereignCore {
+
+    // --- ÖZEL MÜHÜRLER & SABİTLER ---
+    string public constant BLUEPRINT_ID = "001-REALITIZM-MASTER-MINT";
+    string public constant SIGNATURE = "because im dnA of woubleu";
+    string public constant MANIFESTO = "Im not Digital Slave. Even soil returns something when human labor is given to it.";
+    string public constant SAFETY_BOUNDARY = "No vehicle control, no ECU access.";
+
+    // --- DEĞİŞMEZ ROTA VE ADRESLER ---
+    // 0x887 rotası tamamen lağvedildi. Yeni Egemen Cüzdan Çpası mühürlendi.
+    address public constant TARGET_MINT_ADDRESS = 0x68cf3c0b81748e6CCE530adf8Df22E29e7CcDc34; 
+    address public constant RENNOUNCED_OWNER = address(0);
+
+    // --- FİZİKSEL DOĞA KANUNU PARAMETRELERİ (Milyon Çarpanlı Ölçek) ---
+    uint256 public constant RHO = 1225;                // Hava Yoğunluğu * 1000 (kg/m^3)
+    uint256 public constant CD = 35;                   // Sürüklenme Katsayısı * 100
+    uint256 public constant AREA = 10;                 // Sürtünme Yüzey Alanı (m^2)
+    uint256 public constant FIXED_VELOCITY = 3333;     // Sabit Sürüklenme Hızı * 100 (~120 KM/H)
+
+    // --- LOG ETKİNLİKLERİ ---
+    event CosmicFlowAnchored(uint256 indexed timestamp, uint256 flowRatio, uint256 kineticPower, string status);
+    event LaborEquityLogged(address indexed sovereignWallet, uint256 touchCount, uint256 consciousTime, uint256 soilScore);
+
+    constructor() {
+        // Kontrat ayağa kalktığı an mülkiyet ebediyen lağvedilir. Saldırı yüzeyi: %0
+        emit CosmicFlowAnchored(block.timestamp, 0, 0, "INITIAL_STABLE_RENUNCIATION");
+    }
+
+    /**
+     * @notice Evrenin ritmine ve zamanın akışına göre anlık kinetik güç hasat potansiyelini hesaplar.
+     */
+    function processCosmicFlow() public view returns (
+        uint256 currentUnix,
+        uint256 flowRatio,
+        uint256 kineticPower,
+        string memory kesintiDurumu
+    ) {
+        currentUnix = block.timestamp;
+        uint256 secondsPassedToday = currentUnix % 86400;
+        
+        // Günün tamamlanma oranı (1e6 ölçeğinde)
+        flowRatio = (secondsPassedToday * 1000000) / 86400;
+
+        // Kinetik Güç Hesaplaması (P = 0.5 * rho * Cd * A * V^3) / Ölçekleri dengeleme
+        uint256 vCubed = (FIXED_VELOCITY * FIXED_VELOCITY * FIXED_VELOCITY) / 10000;
+        uint256 dragForce = (RHO * CD * AREA * vCubed) / 100000;
+        kineticPower = (dragForce * FIXED_VELOCITY) / 100000;
+
+        kesintiDurumu = "KESİNTİSİZ TAM AKIŞ (STABLE)";
+    }
+
+    /**
+     * @notice Biometrik insan emeğini ve dikkat kanıtını (PoA) ağa çiviler.
+     */
+    function anchorLaborEquity(
+        uint256 _touchCount,
+        uint256 _consciousTime,
+        uint256 _soilScore
+    ) external {
+        require(_touchCount > 0, "Hec bir kinetik temas yok.");
+        
+        (, uint256 flowRatio, uint256 power, string memory status) = processCosmicFlow();
+
+        emit LaborEquityLogged(msg.sender, _touchCount, _consciousTime, _soilScore);
+        emit CosmicFlowAnchored(block.timestamp, flowRatio, power, status);
+    }
+
+    /**
+     * @notice Sistem mülkiyet durumunu sorgular.
+     */
+    function owner() public pure returns (address) {
+        return RENNOUNCED_OWNER;
+    }
+}
 
